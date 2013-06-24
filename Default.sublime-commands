@@ -1,0 +1,18 @@
+[
+    {
+        "caption": "Mono: Compile",
+        "command": "mono_compile"
+    },
+    {
+        "caption": "Mono: Compile Dot Net",
+        "command": "mono_compile_dot_net"
+    },
+    {
+        "caption": "Mono: Compile GTK#",
+        "command": "mono_compile_gtk"
+    },
+    {
+        "caption": "Mono: Run",
+        "command": "mono_run"
+    }
+]

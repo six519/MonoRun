@@ -1,0 +1,7 @@
+[
+	{ "keys": ["shift+ctrl+m"], "command": "mono_compile" },
+	{ "keys": ["shift+ctrl+d"], "command": "mono_compile_dot_net" },
+	{ "keys": ["shift+ctrl+g"], "command": "mono_compile_gtk" },
+	{ "keys": ["shift+ctrl+e"], "command": "mono_run" },
+	{ "keys": ["shift+ctrl+t"], "command": "mono_terminate_application" }
+]

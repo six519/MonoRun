@@ -1,0 +1,33 @@
+[
+	{
+		"caption": "Mono",
+		"mnemonic": "M",
+		"id": "mono",
+		"children": 
+		[
+			{
+				"caption": "Compile",
+				"command": "mono_compile"
+			},
+			{
+				"caption": "Compile Dot Net",
+				"command": "mono_compile_dot_net"
+			},
+			{
+				"caption": "Compile GTK#",
+				"command": "mono_compile_gtk"
+			},
+			{
+				"caption": "-"
+			},
+			{
+				"caption": "Run",
+				"command": "mono_run"
+			},
+			{
+				"caption": "Terminate Application",
+				"command": "mono_terminate_application"
+			}
+		]
+	}
+]

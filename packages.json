@@ -10,8 +10,14 @@
 			"platforms": {
 				"linux": [
 					{
-						"version": "1.0.0",
-						"url": "https://nodeload.github.com/six519/MonoRun/zip/v1.0.0"
+						"version": "1.0.1",
+						"url": "https://nodeload.github.com/six519/MonoRun/zip/v1.0.1"
+					}
+				],
+				"windows": [
+					{
+						"version": "1.0.1",
+						"url": "https://nodeload.github.com/six519/MonoRun/zip/v1.0.1"
 					}
 				]
 			}

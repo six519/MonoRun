@@ -93,7 +93,8 @@ class AppRunner(threading.Thread):
                 if name == APP_ERR_ID:
                     self.__gotError = True
 
-        self.application_callback(self.app_id, self.app_message, self.gotError, self.appRunning.returncode, *self.application_args, **self.application_kwargs)
+        #self.application_callback(self.app_id, self.app_message, self.gotError, self.appRunning.returncode, *self.application_args, **self.application_kwargs)
+        sublime.set_timeout(lambda : self.application_callback(self.app_id, self.app_message, self.gotError, self.appRunning.returncode, *self.application_args, **self.application_kwargs), 1000)
         if self.app_id in AppRunner.applicationID:
             del AppRunner.applicationID[self.app_id]
 
@@ -129,11 +130,13 @@ def monoRunCallback(application_id, messages, got_error, return_code, *args, **k
                         if re.search('^Compilation failed', message):
                             #Compilation failed: 1 error(s), 0 warnings
                             compilation_message = message
+                            message = re.sub('^[A-Z]:', '', message)
                             splittedErr = message.split(':')
                             splittedErr = splittedErr[1].split(',')
                             error_count = int(splittedErr[0].replace('error(s)','').strip())
                             warning_count = int(splittedErr[1].replace('warnings','').strip())
                         elif re.search('.error CS.', message):
+                            message = re.sub('^[A-Z]:', '', message)
                             splittedErr = message.split(':')
                             errLine = int(splittedErr[0].split('(')[1].split(',')[0].strip())
                             line_message_errors.append("%s on line # %s." % (splittedErr[2].strip(), errLine))
@@ -142,6 +145,7 @@ def monoRunCallback(application_id, messages, got_error, return_code, *args, **k
                             caretPos = mono_task.view.sel()[0].begin()
                             marks.append(mono_task.view.sel()[0])
                         elif re.search('^error CS',message):
+                            message = re.sub('^[A-Z]:', '', message)
                             splittedErr = message.split(':')
                             line_message_errors.append("%s" % (splittedErr[1].strip()))
                         else:
@@ -220,8 +224,14 @@ class MonoCompileCommand(MonoFunctions):
 class MonoCompileDotNetCommand(MonoFunctions):
     _task = MONO_TASK_COMPILE_DOTNET
 
+    def is_visible(self):
+        return True if sublime.platform() == 'windows' else False
+
 class MonoCompileGtkCommand(MonoFunctions):
     _task = MONO_TASK_COMPILE_GTKSHARP
+
+    def is_visible(self):
+        return True if sublime.platform() == 'linux' else False
 
 class MonoRunCommand(MonoFunctions):
     _task = MONO_TASK_EXECUTE

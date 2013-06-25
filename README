@@ -1,0 +1,6 @@
+
+I'm still using Sublime Text 2 while reviewing C# syntax. Instead of using MonoDevelop in Linux or Xamarin Studio in Windows, I created a Sublime Text 2 plugin that will compile and debug C# source code.
+
+Install Mono if you want to use this plugin. In Windows, Mono installation directory should be added to the environment variable Path.
+
+You can watch the demo at http://youtu.be/BQ2C0iTk36o

@@ -27,6 +27,13 @@
 			{
 				"caption": "Terminate Application",
 				"command": "mono_terminate_application"
+			},
+			{
+				"caption": "-"
+			},
+			{
+				"caption": "About MonoRun",
+				"command": "mono_about"
 			}
 		]
 	}

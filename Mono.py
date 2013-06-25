@@ -241,3 +241,9 @@ class MonoTerminateApplicationCommand(MonoFunctions):
 
     def is_enabled(self):
         return True if MONO_TASK_EXECUTE in AppRunner.applicationID else False
+
+class MonoAboutCommand(sublime_plugin.TextCommand):
+
+    def run(self, edit):
+        sublime.message_dialog('Created by: Ferdinand Silva (http://ferdinandsilva.com)')
+

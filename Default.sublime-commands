@@ -14,5 +14,9 @@
     {
         "caption": "Mono: Run",
         "command": "mono_run"
+    },
+    {
+        "caption": "Mono: About",
+        "command": "mono_about"
     }
 ]

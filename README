@@ -1,3 +1,6 @@
+Sublime Text 3 is now supported
+
+---------------------------------------------------------------------
 
 I'm still using Sublime Text 2 while reviewing C# syntax. Instead of using MonoDevelop in Linux or Xamarin Studio in Windows, I created a Sublime Text 2 plugin that will compile and debug C# source code.
 

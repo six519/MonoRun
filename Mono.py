@@ -4,7 +4,7 @@ import subprocess
 import re
 import os
 import threading
-import Queue
+import sys
 
 MONO_TASK_NONE = 0
 MONO_TASK_COMPILE = 1
@@ -15,6 +15,17 @@ MONO_TASK_TERMINATE = 5
 
 APP_OUT_ID = 'STOUT'
 APP_ERR_ID = 'STERR'
+
+MONO_BASE = None
+
+if sys.version_info[0] == 2:
+    from Queue import Queue, Empty
+    from base2 import BaseMono2
+    MONO_BASE = BaseMono2
+else:
+    from .base3 import BaseMono3
+    MONO_BASE = BaseMono3
+    from queue import Queue, Empty
 
 def appRunnerCallback(application_id, message, got_error, return_code, *args, **kwargs):
     pass
@@ -38,7 +49,7 @@ class AppRunner(threading.Thread):
         self.application_kwargs = kwargs.pop('application_kwargs', dict())
         super(AppRunner, self).__init__(*args, **kwargs)
 
-        self.queue = Queue.Queue()
+        self.queue = Queue()
         self.__gotError = False
         self.__app_message = []
 
@@ -81,15 +92,21 @@ class AppRunner(threading.Thread):
             try:
                 qItem = self.queue.get(True, 1)
 
-            except Queue.Empty:
+            except Empty:
 
                 if self.appRunning.poll() is not None:
                     break
             else:
 
                 name, message = qItem
-                self.__app_message.append(message.strip())
                 
+                try:
+                    #python3
+                    self.__app_message.append(str(message, 'utf-8').strip())
+                except TypeError:
+                    #python2
+                    self.__app_message.append(message.strip())
+
                 if name == APP_ERR_ID:
                     self.__gotError = True
 
@@ -166,16 +183,8 @@ def monoRunCallback(application_id, messages, got_error, return_code, *args, **k
                 else:
                     MonoFunctions.printMessage("Application terminated.")
 
-class MonoFunctions(sublime_plugin.TextCommand):
+class MonoFunctions(MONO_BASE, sublime_plugin.TextCommand):
     _task = MONO_TASK_NONE
-
-    @staticmethod
-    def printMessage(msg):
-
-        sublime.active_window().run_command('show_panel', {'panel': 'console', 'toggle': False})
-        ascii_art = open("%s/%s" % (sublime.packages_path(), "/MonoRun/ascii"), 'r')
-        print "%s" % (ascii_art.read() % msg)
-        ascii_art.close()
 
     def is_enabled(self):
         return False if MONO_TASK_EXECUTE in AppRunner.applicationID else True
@@ -216,7 +225,7 @@ class MonoFunctions(sublime_plugin.TextCommand):
                     pass
 
         except Exception as msg:
-            MonoFunctions.printMessage("An unexpected error occurred while running the mono compiler.\nThe error is %s." % msg.message)
+            MonoFunctions.printMessage("An unexpected error occurred while running the mono compiler.\nThe error is %s." % msg.message if hasattr(msg, "message") else msg)
 
 class MonoCompileCommand(MonoFunctions):
     _task = MONO_TASK_COMPILE

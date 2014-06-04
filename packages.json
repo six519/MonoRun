@@ -1,26 +1,21 @@
 {
-	"schema_version": "1.2",
+	"schema_version": "2.0",
 	"packages": [
 		{
 			"name": "MonoRun",
 			"description": "Basic compiler/debugger for Mono",
 			"author": "Ferdinand E. Silva",
 			"homepage": "https://github.com/six519/MonoRun",
-			"last_modified": "2013-06-24 10:45:00",
-			"platforms": {
-				"linux": [
-					{
-						"version": "1.0.1",
-						"url": "https://nodeload.github.com/six519/MonoRun/zip/v1.0.1"
-					}
-				],
-				"windows": [
-					{
-						"version": "1.0.1",
-						"url": "https://nodeload.github.com/six519/MonoRun/zip/v1.0.1"
-					}
-				]
-			}
+			"details": "https://github.com/six519/MonoRun",
+
+			"releases": [
+				{
+					"version": "1.0.2",
+					"url": "https://nodeload.github.com/six519/MonoRun/zip/v1.0.2",
+					"date": "2014-06-05 02:05:00",
+					"sublime_text": "*"
+				}
+			]
 		}
 	]
 }

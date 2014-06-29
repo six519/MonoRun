@@ -10,10 +10,10 @@
 
 			"releases": [
 				{
-					"version": "1.0.2",
-					"url": "https://nodeload.github.com/six519/MonoRun/zip/v1.0.2",
-					"date": "2014-06-05 02:05:00",
-					"sublime_text": "*"
+					"sublime_text": "*",
+					"version": "2.0.0",
+					"url": "https://nodeload.github.com/six519/MonoRun/zip/v2.0.0",
+					"date": "2014-06-30 03:05:00"
 				}
 			]
 		}
